@@ -4,6 +4,8 @@
 
 
 from flask import Flask, render_template       # render_template : 요청한 클라이언트에 HTML형식으로 문서화 시켜서 보내는 Class
+from data import Articles
+
 
 app = Flask(__name__)
 app.debug = True
@@ -22,7 +24,9 @@ def about():
 
 @app.route("/articles")
 def articles():
-    return render_template("articles.html")
+    articles = Articles()
+    print(len(articles))
+    return render_template("articles.html", articles = articles)
 
 
 if __name__ == "__main__":      # 여길 제일 먼저 실행 (가장 초입에 작성)
