@@ -8,12 +8,21 @@ from flask import Flask, render_template       # render_template : 요청한 클
 app = Flask(__name__)
 app.debug = True
 
-@app.route("/data")      # decoration : 메소드를 연계하게 해준다. (app.route 경로지정)
+@app.route("/")      # decoration : 메소드를 연계하게 해준다. (app.route 경로지정)
 def index():
-    print("World success")
+    print("World success")                                  # cmd에 World success 출력
     # return "TEST"
-    return render_template("home.html")     # 만들어둔 home.html의 문서 데이터를 페이지로 불러 시각화함
-                                            # render_template class 및 method는 파일 내 templates 파일에 플러그인 함(내부 class 자체가 이렇게 코딩되어있음 즉, templates 파일을 만들 것)
+    return render_template("home.html", hello = "Koy")      # 만들어둔 home.html의 문서 데이터를 페이지로 불러 시각화함
+                                                            # render_template class 및 method는 파일 내 templates 파일에 플러그인 함(내부 class 자체가 이렇게 코딩되어있음 즉, templates 파일을 만들 것)
+                                                            # hello 변수에 "koy" 저장 후 home.html에 사용가능 {{}}로 호출
+
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+@app.route("/articles")
+def articles():
+    return render_template("articles.html")
 
 
 if __name__ == "__main__":      # 여길 제일 먼저 실행 (가장 초입에 작성)
