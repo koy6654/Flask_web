@@ -22,7 +22,7 @@ def index():
 def about():
     return render_template("about.html")
 
-@app.route("/articles")
+@app.route("/articles", methods = ['GET', 'POST'])      # GET 형식과 POST 형식 둘 다 적용되게 함
 def articles():
     articles = Articles()
     print(len(articles))
