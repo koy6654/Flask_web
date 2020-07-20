@@ -1,0 +1,21 @@
+#서버와 교류하는 방법은 get 방식과 post 방식이 있다
+#get 방식은 URL에 데이터를 포함시켜서 교류함 (보안 취약, 빠름)
+#post 방식은 html문서 body에 데이터를 포함시켜서 교류함(보안 강하고 get보다 느림)
+
+
+from flask import Flask, render_template       # render_template : 요청한 클라이언트에 HTML형식으로 문서화 시켜서 보내는 Class
+
+app = Flask(__name__)
+app.debug = True
+
+@app.route("/data")      # decoration : 메소드를 연계하게 해준다. (app.route 경로지정)
+def index():
+    print("World success")
+    # return "TEST"
+    return render_template("home.html")     # 만들어둔 home.html의 문서 데이터를 페이지로 불러 시각화함
+                                            # render_template class 및 method는 파일 내 templates 파일에 플러그인 함(내부 class 자체가 이렇게 코딩되어있음 즉, templates 파일을 만들 것)
+
+
+if __name__ == "__main__":      # 여길 제일 먼저 실행 (가장 초입에 작성)
+    # app.run(host = "0.0.0.0", port = "8080")
+    app.run()                   # defalut 값 port = "5000"
