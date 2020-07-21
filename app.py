@@ -36,7 +36,8 @@ def image():
 @app.route("/article/<int:id>")
 def article(id):
     print(type(id))
-    return render_template("articles.html")
+    articles = Articles()
+    return render_template("article.html", articles = [articles, id])
 
 
 if __name__ == "__main__":      # 여길 제일 먼저 실행 (가장 초입에 작성)
