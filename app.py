@@ -33,6 +33,12 @@ def articles():
 def image():
     return render_template("image.html")
 
+@app.route("/article/<int:id>")
+def article(id):
+    print(type(id))
+    return render_template("articles.html")
+
+
 if __name__ == "__main__":      # 여길 제일 먼저 실행 (가장 초입에 작성)
     # app.run(host = "0.0.0.0", port = "8080")
     app.run()                   # defalut 값 port = "5000"
