@@ -2,13 +2,31 @@
 #get 방식은 URL에 데이터를 포함시켜서 교류함 (보안 취약, 빠름)
 #post 방식은 html문서 body에 데이터를 포함시켜서 교류함(보안 강하고 get보다 느림)
 
-
 from flask import Flask, render_template       # render_template : 요청한 클라이언트에 HTML형식으로 문서화 시켜서 보내는 Class
 from data import Articles
-
+from flask import flash, redirect, url_for, session, request, logging
+from flask_mysqldb import MySQL
+import pymysql
 
 app = Flask(__name__)
 app.debug = True
+
+#config MySQL
+# app.config['MYSQL_HOST']='localhost'
+# app.config['MYSQL_USER']='root'
+# app.config['MYSQL_PASSWORD']='1234'
+# app.config['MYSQL_DB']='myflaskapp'
+# app.config['MYSQL_CURSORCLASS']='DictCursor'
+
+# db = pymysql.connect(host='localhost', port=3306, user='root', passwd = '1234', db='myflaskapp')
+# cursor = db.cursor()
+#init mysql
+# mysql = MySQL(app)
+
+# cur = mysql.connection.cursor()
+# result = cur.execute("SELECT * FROM users;")
+# print(result)
+
 
 @app.route("/")      # decoration : 메소드를 연계하게 해준다. (app.route 경로지정)
 def index():
