@@ -29,11 +29,12 @@ cursor = db.cursor()
 
 
 # sql_1 조회
-sql_1 = 'SELECT * FROM users WHERE `id` = 1;'		# *에 원하는 인자 and where 없으면 전부 조회
+sql_1 = 'SELECT * FROM users;'		# *에 원하는 인자 and where 없으면 전부 조회
 cursor.execute(sql_1)
-db.commit()
 
 users = cursor.fetchall()
+
+db.commit()
 print(users)
 
 
@@ -66,7 +67,7 @@ sql_3 = '''
 sql_4 = '''
 		DELETE FROM `myflaskapp`.`users` WHERE  `name` = "LEE";
 
-		'''
+	'''
 # cursor.execute(sql_4)
 # db.commit()
 
@@ -75,12 +76,51 @@ sql_4 = '''
 # sql_5 행 변경
 sql_5 = '''
 		UPDATE `myflaskapp`.`users` SET `name`='koy' WHERE  `id`=1;
-		'''
-cursor.execute(sql_5)
-db.commit()
+	'''
+# cursor.execute(sql_5)
+# db.commit()
 
 
 
+
+# sql_6 topic에 변수 데이터 삽입
+title = "JavaScript"
+body = "프로토타입기반의 객체지향 프로그래밍 언어로 스크립트 언어에 해당된다. 특수한 목적이 아닌 이상 모든 웹 브라우저에 인터프리터가 내장되어 있다. 오늘날 HTML, CSS와 함께 웹을 구성하는 요소 중 하나다. HTML이 웹 페이지의 기본 구조를 담당하고, CSS가 디자인을 담당한다면 JavaScript는 클라이언트 단에서 웹 페이지가 동작하는 것을 담당한다."
+author = "Koy"
+
+sql_6 = '''
+                INSERT INTO topic(title, body, author)
+                VALUES(%s, %s, %s)
+        '''
+# cursor.execute(sql_6, (title, body, author))
+# db.commit()
+
+
+
+
+
+# sql_7 topic 행 조회
+sql_7 = '''
+                SELECT * FROM topic WHERE `id` = 1;
+        '''
+# cursor.execute(sql_7)
+# db.commit()
+
+# users_7 = cursor.fetchall()
+# print(users_7)
+
+
+
+
+
+
+# sql_8
+sql_8 = '''
+                INSERT INTO topic(title, body, author)
+                VALUES('gary', 'bodddddddddddy' , 'gary')
+        '''
+# cursor.execute(sql_8)
+# db.commit()
 
 db.close()
 
