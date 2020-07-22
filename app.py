@@ -11,7 +11,7 @@ app = Flask(__name__)
 app.debug = True
 
 db = pymysql.connect(host='localhost', port=3306, user='root', passwd='1234', db='myflaskapp')
-
+cursor = db.cursor()
 
 @app.route("/")      # decoration : 메소드를 연계하게 해준다. (app.route 경로지정)
 def index():
@@ -57,7 +57,7 @@ def register():
         if password == re_password:
             print(name, email, password, re_password, username)
 
-            cursor = db.cursor()
+
             sql =   '''
                         INSERT INTO users(`name`, `email`, `username`, `password`)
                         VALUES(%s, %s, %s, %s)
@@ -65,23 +65,21 @@ def register():
 
             cursor.execute(sql, (name, email, username, password))
             db.commit()
-            
-
-            cursor = db.cursor()
-            sql_select = 'SELECT * FROM users;'
-            cursor.execute(sql_select)
-            users = cursor.fetchall()
-            db.commit()
-            print(users)
-            db.close()
+            # sql_select = 'SELECT * FROM users;'
+            # cursor.execute(sql_select)
+            # users = cursor.fetchall()
+            # db.commit()
+            # print(users)
            
 
             return "POST SUCCESS"
         else:
         # name = form.name.data
             return "Invaild Password"
+
+        db.close()
     else:
-        return "GET Success"
+        return render_template('register.html')
 
 
 if __name__ == "__main__":      # 여길 제일 먼저 실행 (가장 초입에 작성)

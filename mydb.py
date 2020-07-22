@@ -31,7 +31,6 @@ cursor = db.cursor()
 # sql_1 조회
 sql_1 = 'SELECT * FROM users;'		# *에 원하는 인자 and where 없으면 전부 조회
 cursor.execute(sql_1)
-
 users = cursor.fetchall()
 
 db.commit()
