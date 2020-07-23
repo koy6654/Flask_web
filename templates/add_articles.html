@@ -1,0 +1,35 @@
+{% extends 'layouts.html' %}
+{% block body %}
+<div class = "main-container">
+
+<div class="pd-20 card-box mb-30">
+    <div class="clearfix">
+        <div class="pull-left">
+            <h4 class="text-blue h4">Writing Lists Board</h4>
+            <p class="mb-30">Input your Words!</p>
+        </div>
+    </div>
+    <form action = "/add_articles" method = 'POST' onsubmit="return confirm('Are you sure to Submit?')">
+        <div class="form-group">
+            <label>TITLE</label>
+            <input class="form-control" type="text" name = 'title' placeholder="Input your Title" required>
+        </div>
+        <div class="form-group">
+            <label>DESCRIPTIONS</label>
+            <textarea class="form-control" name = 'body' placeholder="Input your Descriptions" required></textarea>
+        </div>
+        <div class="form-group">
+            <label>AUTHOR</label>
+            <input type="text" name = 'author' class="form-control" placeholder="Input your Author" required>
+        </div>
+<div class = "form-group">
+    <input class = "btn btn-success btn-warning btn-block" type="submit" value="제출">    
+</div>
+
+<div>
+    <a class = "btn btn-success btn-primary btn-block" href="/articles"> 돌아가기 </a>
+
+</div>
+</div>>
+
+{% endblock %}
