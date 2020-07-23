@@ -1,15 +1,15 @@
 {% extends "layouts.html" %}
-{% block body %}
 
+{% block body %}
 <div class="card">
     <div class="card-header">
-        {{ articles[0][articles[1]-1]['author'] }}
+       <h4><i class="fas fa-user mr-1"></i> 작성자 : {{ data[3] }}</h4> 
     </div>
     <div class="card-body">
-      <h5 class="card-title">{{ articles[0][articles[1]-1]['title'] }}</h5>
-      <p class="card-text">{{ articles[0][articles[1]-1]['body'] }}</p>
+      <h5 class="card-title"><i class="icon-copy ion-ios-paper"></i> 타이틀 : {{ data[1] }}</h5>
+      <p class="card-text"><h5><i class="icon-copy ion-ios-paper"></i> 내용</h5>>{{ data[2] }}</p>
       <a href="/articles" class="btn btn-primary">Back</a>
+      <a href="/article/{{ data[0] }}/edit_article" class="btn btn-danger">Edit</a>
     </div>
   </div>
-
- {% endblock %}
+{% endblock %}

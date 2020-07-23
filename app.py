@@ -110,13 +110,21 @@ def articles():
     # return "GET Success"
 
 
-@app.route('/article/<int:id>')
+@app.route('/article/<string:id>')
 def article(id):
-    print(type(id))
-    articles= Articles()[id-1]
-    # print(articles)
-    return render_template('article.html',data =articles)
-    # return "Success"
+    # print(type(id))
+    # articles= Articles()[id-1]
+
+    cursor = db.cursor()
+    sql = 'SELECT * FROM topic WHERE id = %s;'   
+    cursor.execute(sql, [id])
+    topic = cursor.fetchone()
+    print(topic)
+    
+  
+
+    return render_template('article.html', data = topic)
+
 
 @app.route('/add_articles',methods=['GET','POST'])
 def add_articles():
@@ -138,6 +146,45 @@ def add_articles():
         return render_template('add_articles.html')
 
     db.close()
+
+
+@app.route('/article/<string:id>/edit_article', methods = ['GET','POST'])
+def edit_article(id):
+ 
+    if request.method == "POST":
+        title = request.form['title']
+        body = request.form['body']
+        author = request.form['author']
+        
+        cursor = db.cursor()
+        sql =   '''
+                    UPDATE `myflaskapp`.`topic` SET `title` = %s, `body`=%s, `author`=%s WHERE `id` = %s;
+                '''
+        cursor.execute(sql, (title, body, author, [id]))
+        db.commit()
+        return redirect(url_for('articles'))
+
+    else:
+        print(id)
+        cursor = db.cursor()
+        sql = 'SELECT * FROM topic WHERE id = %s'
+        cursor.execute(sql, [id])
+        topic = cursor.fetchone()
+
+        return render_template('edit_article.html', data = topic)
+    db.close()
+
+@app.route('/delete/<string:id>', methods = ['POST'])
+def delete(id):
+    cursor = db.cursor()
+    sql =   '''
+                DELETE FROM `topic` WHERE `id` = %s;
+            '''
+    cursor.execute(sql, [id])
+    db.commit()
+    return redirect(url_for('articles'))
+
+
 
 if __name__ =='__main__':
     # app.run(host='0.0.0.0', port='8080')

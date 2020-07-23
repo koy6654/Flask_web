@@ -20,7 +20,7 @@
                             <th>DESCRIPTION</th>
                             <th>AUTHOR</th>
                             <th>DATE</th>
-                            <th>EDIT</th>
+                            <th>DELETE</th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -30,7 +30,7 @@
                             <th>DESCRIPTION</th>
                             <th>AUTHOR</th>
                             <th>DATE</th>
-                            <th>EDIT</th>
+                            <th>DELETE</th>
                         </tr>
                     </tfoot>
                     <tbody>
@@ -41,15 +41,14 @@
                           <td>{{ article[2] }}</td>
                           <td>{{ article[3] }}</td>
                           <td>{{ article[4] }}</td>
-                          <td><button type="button" class="btn btn-danger">Edit</button></td>
+                          <td><form action="/delete/{{ article[0] }}" method = "POST" onsubmit = "return confirm('Are you sure to Delete?')" ><button type="submit" class="btn btn-danger"> DELETE </button></form></td>
                         </tr>
                     {% endfor %}
                       </tbody>
                     </table>
+                    <a href="/add_articles" class="btn btn-primary">Add Article</a>
                     </div>
                     </div>
                     </div>
-
-    <a class="btn btn-warning btn-lg" href="#" role="button">Learn more</a>
   </div>
 {% endblock %}
